@@ -1,0 +1,4 @@
+-r requirements.txt
+PyQt6==6.7.1
+markdown==3.7
+PyQt6-WebEngine==6.7.0
