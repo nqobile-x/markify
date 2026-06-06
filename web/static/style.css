@@ -1,0 +1,143 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0d1b2a 100%);
+  min-height: 100vh;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.logo {
+  color: #64b5f6;
+  letter-spacing: 4px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.tagline { color: rgba(255,255,255,0.3); font-size: 12px; }
+
+main { max-width: 1100px; margin: 0 auto; padding: 32px 24px; display: flex; flex-direction: column; gap: 24px; }
+
+.drop-zone {
+  background: rgba(255,255,255,0.04);
+  border: 2px dashed rgba(100,181,246,0.3);
+  border-radius: 12px;
+  padding: 48px 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.drop-zone.dragover { border-color: #64b5f6; background: rgba(100,181,246,0.06); }
+.drop-icon { font-size: 28px; margin-bottom: 12px; color: rgba(100,181,246,0.6); }
+.drop-zone p { color: rgba(255,255,255,0.5); font-size: 14px; }
+.browse-link { color: #64b5f6; cursor: pointer; text-decoration: underline; }
+.formats { font-size: 11px; margin-top: 8px; color: rgba(255,255,255,0.25); }
+
+.queue-section { display: flex; flex-direction: column; gap: 12px; }
+.file-queue { display: flex; flex-direction: column; gap: 8px; }
+
+.queue-item {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.queue-item .badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.queue-item .filename { flex: 1; font-size: 13px; }
+.queue-item .status { font-size: 12px; color: rgba(255,255,255,0.4); }
+.status-done { color: #81c784 !important; }
+.status-error { color: #ef9a9a !important; }
+.queue-actions { display: flex; gap: 12px; align-items: center; }
+
+.btn-primary {
+  background: linear-gradient(90deg, #64b5f6, #7c4dff);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 24px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-secondary, .btn-sm {
+  background: rgba(255,255,255,0.06);
+  color: #64b5f6;
+  border: 1px solid rgba(100,181,246,0.3);
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-sm { padding: 5px 12px; font-size: 12px; }
+
+.preview-section {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.panel-label { color: #64b5f6; font-size: 10px; letter-spacing: 2px; font-weight: 700; }
+.preview-actions { display: flex; gap: 8px; }
+.preview-content { padding: 24px; min-height: 300px; line-height: 1.7; font-size: 14px; }
+.preview-content h1, .preview-content h2, .preview-content h3 { color: #64b5f6; margin: 16px 0 8px; }
+.preview-content table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+.preview-content th, .preview-content td { border: 1px solid rgba(255,255,255,0.1); padding: 6px 12px; }
+.preview-content th { background: rgba(100,181,246,0.08); }
+.preview-content blockquote { border-left: 3px solid #7c4dff; padding-left: 12px; color: #aaa; }
+.preview-content code { background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+
+.raw-content {
+  width: 100%;
+  min-height: 300px;
+  padding: 24px;
+  background: transparent;
+  color: #e0e0e0;
+  border: none;
+  resize: vertical;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.hidden { display: none !important; }
+
+@media (max-width: 600px) {
+  main { padding: 16px; }
+  .drop-zone { padding: 32px 16px; }
+}
+
+.badge-docx, .badge-doc { background: rgba(79,195,247,0.2); color: #4fc3f7; }
+.badge-pptx, .badge-ppt { background: rgba(255,138,101,0.2); color: #ff8a65; }
+.badge-xlsx, .badge-xls { background: rgba(129,199,132,0.2); color: #81c784; }
+.badge-pdf { background: rgba(206,147,216,0.2); color: #ce93d8; }
+.badge-txt, .badge-csv, .badge-rtf { background: rgba(224,224,224,0.1); color: #e0e0e0; }
