@@ -13,7 +13,7 @@ from core.engine import convert
 
 app = FastAPI(title="Markify")
 
-UPLOAD_DIR = Path("C:/tmp/markify")
+UPLOAD_DIR = Path("/tmp/markify")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
 
