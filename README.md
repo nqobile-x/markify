@@ -44,7 +44,7 @@ Drop any supported file onto the page, click **Convert All**, and get clean Mark
 
 ---
 
-## Project structure
+## Project structure.
 
 ```
 markify/
