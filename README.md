@@ -10,7 +10,7 @@
 
 ---
 
-## What it does
+## What it does.
 
 Markify converts documents into high-fidelity Markdown — preserving headings, tables, bold/italic formatting, images, and more.
 
