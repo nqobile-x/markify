@@ -1,4 +1,4 @@
-# Markify
+# Markify.
 
 **Convert Word, PowerPoint, Excel, PDF, and plain text files into clean Markdown — instantly.**
 
