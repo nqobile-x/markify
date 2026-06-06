@@ -3,46 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Markify</title>
+  <title>Markify — Document to Markdown</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <header>
-    <span class="logo">MARKIFY</span>
-    <span class="tagline">Document → Markdown</span>
+
+  <!-- Header -->
+  <header role="banner">
+    <div class="header-inner">
+      <div class="logo-group">
+        <svg class="logo-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <rect width="28" height="28" rx="7" fill="url(#logoGrad)"/>
+          <path d="M7 9h4l3 6 3-6h4M7 19h14" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#64b5f6"/>
+              <stop offset="1" stop-color="#7c4dff"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">Markify</span>
+      </div>
+      <span class="tagline">Document → Markdown</span>
+    </div>
   </header>
 
-  <main>
-    <section class="drop-section">
-      <div id="dropZone" class="drop-zone">
-        <div class="drop-icon">✦</div>
-        <p>Drop files here or <span class="browse-link" onclick="document.getElementById('fileInput').click()">browse</span></p>
-        <p class="formats">.docx .pptx .xlsx .pdf .txt .csv .rtf</p>
-        <input type="file" id="fileInput" multiple accept=".docx,.doc,.pptx,.ppt,.xlsx,.xls,.pdf,.txt,.csv,.rtf" style="display:none">
+  <main id="main-content">
+
+    <!-- Drop Zone -->
+    <section aria-label="File upload">
+      <div
+        id="dropZone"
+        class="drop-zone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop documents here or press Enter to browse files"
+      >
+        <!-- Upload icon (SVG) -->
+        <div class="drop-icon-wrap" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="20" fill="rgba(100,181,246,0.08)"/>
+            <path d="M20 26V14M14 20l6-6 6 6" stroke="#64b5f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13 28h14" stroke="#64b5f6" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="drop-title">Drop files here or <span class="browse-link">browse</span></p>
+        <p class="formats">.docx &nbsp;·&nbsp; .pptx &nbsp;·&nbsp; .xlsx &nbsp;·&nbsp; .pdf &nbsp;·&nbsp; .txt &nbsp;·&nbsp; .csv &nbsp;·&nbsp; .rtf</p>
+        <input
+          type="file"
+          id="fileInput"
+          multiple
+          accept=".docx,.doc,.pptx,.ppt,.xlsx,.xls,.pdf,.txt,.csv,.rtf"
+          style="display:none"
+          aria-label="Select documents to convert"
+        >
       </div>
     </section>
 
-    <section id="queueSection" class="queue-section hidden">
-      <div id="fileQueue" class="file-queue"></div>
+    <!-- File Queue -->
+    <section id="queueSection" class="queue-section hidden" aria-label="Conversion queue" aria-live="polite">
+      <div id="fileQueue" class="file-queue" role="list"></div>
       <div class="queue-actions">
-        <button id="convertAllBtn" class="btn-primary">Convert All →</button>
-        <button id="downloadZipBtn" class="btn-secondary hidden">Download All as ZIP</button>
+        <button id="convertAllBtn" class="btn-primary" type="button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Convert All
+        </button>
+        <button id="downloadZipBtn" class="btn-secondary hidden" type="button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Download ZIP
+        </button>
       </div>
     </section>
 
-    <section id="previewSection" class="preview-section hidden">
+    <!-- Preview -->
+    <section id="previewSection" class="preview-section hidden" aria-label="Markdown preview">
       <div class="preview-header">
-        <span class="panel-label">PREVIEW</span>
-        <div class="preview-actions">
-          <button class="btn-sm" id="toggleRawBtn">Raw Markdown</button>
-          <button class="btn-sm" id="copyBtn">Copy</button>
-          <button class="btn-sm" id="downloadMdBtn">Download .md</button>
+        <span class="panel-label" aria-hidden="true">PREVIEW</span>
+        <div class="preview-actions" role="group" aria-label="Preview actions">
+          <button class="btn-sm" id="toggleRawBtn" type="button" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M2 4l3 3-3 3M7 10h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Raw
+          </button>
+          <button class="btn-sm" id="copyBtn" type="button" aria-label="Copy markdown to clipboard">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <rect x="5" y="5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M9 5V3.5A1.5 1.5 0 007.5 2H3.5A1.5 1.5 0 002 3.5v4A1.5 1.5 0 003.5 9H5" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            Copy
+          </button>
+          <button class="btn-sm" id="downloadMdBtn" type="button" aria-label="Download markdown file">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M7 2v7M4 6l3 4 3-4M2 12h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            .md
+          </button>
         </div>
       </div>
-      <div id="previewContent" class="preview-content"></div>
-      <textarea id="rawContent" class="raw-content hidden" readonly></textarea>
+
+      <!-- Skeleton loader -->
+      <div id="previewSkeleton" class="skeleton-wrap hidden" aria-hidden="true">
+        <div class="skeleton skeleton-h1"></div>
+        <div class="skeleton skeleton-line"></div>
+        <div class="skeleton skeleton-line short"></div>
+        <div class="skeleton skeleton-line"></div>
+        <div class="skeleton skeleton-line medium"></div>
+      </div>
+
+      <div id="previewContent" class="preview-content" role="region" aria-label="Rendered markdown"></div>
+      <textarea id="rawContent" class="raw-content hidden" readonly aria-label="Raw markdown text"></textarea>
     </section>
+
   </main>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
   <script src="/static/app.js"></script>
 </body>
